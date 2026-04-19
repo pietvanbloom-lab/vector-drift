@@ -43,7 +43,7 @@
         <span>Refresh · continuous</span>
       </div>
       <h1 style="margin-bottom:16px" data-reveal>Global threat surface.</h1>
-      <p class="lede" style="max-width:80ch" data-reveal>Click a region to filter all modules. Hover a hotspot for a country snapshot. This page renders a schematic projection - not a geopolitical claim.</p>
+      <p class="lede" style="max-width:80ch" data-reveal>Orthographic projection, auto-rotating. 16 monitored nodes, 8 corridors. Filter the event feed below by threat lens. This page renders a schematic projection, not a geopolitical claim.</p>
 
       <div class="filter-row" data-reveal>
         <button class="on" data-f="all">All Lenses</button>
@@ -55,73 +55,13 @@
         <button data-f="finance">Finance</button>
       </div>
 
-      <div class="map-wrap" data-reveal>
-        <svg viewBox="0 0 1600 800" aria-label="Schematic world threat map">
-          <defs>
-            <linearGradient id="land" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#1a1a28"/>
-              <stop offset="100%" stop-color="#101018"/>
-            </linearGradient>
-            <filter id="glow2"><feGaussianBlur stdDeviation="3"/></filter>
-          </defs>
-          <!-- grid -->
-          <g stroke="rgba(0,255,204,.06)" stroke-width="0.6">
-            <path d="M0 200 L1600 200 M0 400 L1600 400 M0 600 L1600 600"/>
-            <path d="M200 0 L200 800 M400 0 L400 800 M600 0 L600 800 M800 0 L800 800 M1000 0 L1000 800 M1200 0 L1200 800 M1400 0 L1400 800"/>
-          </g>
-          <!-- simplified landmasses as blobs -->
-          <g fill="url(#land)" stroke="rgba(0,255,204,.22)" stroke-width="0.8">
-            <path d="M150 200 Q250 150 400 170 Q500 200 500 280 Q450 360 350 360 Q220 340 160 300 Z"/>
-            <path d="M520 240 Q620 210 720 230 Q760 300 700 360 Q600 370 540 320 Z"/>
-            <path d="M720 260 Q820 210 980 230 Q1100 250 1200 320 Q1250 420 1150 470 Q1000 480 880 450 Q770 400 720 340 Z"/>
-            <path d="M1050 500 Q1140 480 1220 520 Q1230 600 1160 640 Q1070 640 1040 580 Z"/>
-            <path d="M300 400 Q400 410 430 480 Q420 580 340 640 Q270 600 280 510 Z"/>
-            <path d="M1320 540 Q1400 540 1430 590 Q1420 650 1360 660 Q1310 630 1310 580 Z"/>
-          </g>
-          <!-- hotspots -->
-          <g>
-            <g class="pt" data-lens="geo" data-sev="amber">
-              <circle cx="790" cy="310" r="16" fill="#FFB800" opacity=".12"/>
-              <circle cx="790" cy="310" r="4" fill="#FFB800" filter="url(#glow2)"/>
-              <text x="802" y="308" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">FRA</text>
-            </g>
-            <g class="pt" data-lens="infra" data-sev="red">
-              <circle cx="860" cy="350" r="18" fill="#FF3355" opacity=".15"/>
-              <circle cx="860" cy="350" r="4.5" fill="#FF3355" filter="url(#glow2)"/>
-              <text x="872" y="348" fill="#FF3355" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SUEZ</text>
-            </g>
-            <g class="pt" data-lens="cyber" data-sev="cyan">
-              <circle cx="360" cy="300" r="14" fill="#00FFCC" opacity=".12"/>
-              <circle cx="360" cy="300" r="4" fill="#00FFCC" filter="url(#glow2)"/>
-              <text x="372" y="298" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">NYC</text>
-            </g>
-            <g class="pt" data-lens="geo" data-sev="red">
-              <circle cx="960" cy="260" r="18" fill="#FF3355" opacity=".15"/>
-              <circle cx="960" cy="260" r="4.5" fill="#FF3355" filter="url(#glow2)"/>
-              <text x="972" y="258" fill="#FF3355" font-family="JetBrains Mono" font-size="10" letter-spacing="2">MOS</text>
-            </g>
-            <g class="pt" data-lens="cyber" data-sev="amber">
-              <circle cx="1190" cy="360" r="16" fill="#FFB800" opacity=".12"/>
-              <circle cx="1190" cy="360" r="4" fill="#FFB800" filter="url(#glow2)"/>
-              <text x="1202" y="358" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">TYO</text>
-            </g>
-            <g class="pt" data-lens="finance" data-sev="amber">
-              <circle cx="1150" cy="420" r="14" fill="#FFB800" opacity=".12"/>
-              <circle cx="1150" cy="420" r="4" fill="#FFB800" filter="url(#glow2)"/>
-              <text x="1162" y="418" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SGP</text>
-            </g>
-            <g class="pt" data-lens="climate" data-sev="cyan">
-              <circle cx="400" cy="580" r="14" fill="#00FFCC" opacity=".12"/>
-              <circle cx="400" cy="580" r="4" fill="#00FFCC" filter="url(#glow2)"/>
-              <text x="412" y="578" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SAO</text>
-            </g>
-            <g class="pt" data-lens="health" data-sev="cyan">
-              <circle cx="1100" cy="330" r="14" fill="#00FFCC" opacity=".12"/>
-              <circle cx="1100" cy="330" r="4" fill="#00FFCC" filter="url(#glow2)"/>
-              <text x="1112" y="328" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SHA</text>
-            </g>
-          </g>
-        </svg>
+      <div class="map-wrap globe-wrap" data-reveal>
+        <svg data-globe data-size="820" aria-label="Rotating global threat surface" class="vd-globe vd-globe-hero"></svg>
+        <div class="globe-hud">
+          <div class="hud-row"><span class="hud-k">◆ PROJECTION</span><span class="hud-v">ORTHOGRAPHIC · AUTO-SPIN</span></div>
+          <div class="hud-row"><span class="hud-k">▲ SURFACE</span><span class="hud-v">16 NODES · 8 CORRIDORS</span></div>
+          <div class="hud-row"><span class="hud-k">· CLOCK</span><span class="hud-v" data-utc>00:00:00 UTC</span></div>
+        </div>
       </div>
 
       <div class="map-legend">
@@ -164,16 +104,15 @@
 <footer id="footer"></footer>
 <script src="assets/js/chrome.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/globe.js"></script>
 <script>
-  // simple filter interaction
+  // simple filter interaction (applies to the event cards only)
   const buttons = document.querySelectorAll('.filter-row button');
   const events = document.querySelectorAll('.map-events .event');
-  const pts = document.querySelectorAll('.map-wrap .pt');
   buttons.forEach(b => b.addEventListener('click', () => {
     buttons.forEach(x => x.classList.remove('on')); b.classList.add('on');
     const f = b.dataset.f;
     events.forEach(e => { e.style.display = (f==='all' || e.dataset.lens===f) ? '' : 'none'; });
-    pts.forEach(p => { p.style.opacity = (f==='all' || p.dataset.lens===f) ? 1 : 0.18; });
   }));
 </script>
 </body>

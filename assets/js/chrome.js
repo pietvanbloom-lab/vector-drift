@@ -4,6 +4,8 @@
   const current = (document.body.dataset.page || '').toLowerCase();
   const depth = parseInt(document.body.dataset.depth || '0', 10);
   const P = depth > 0 ? '../'.repeat(depth) : './';
+  // Expose base path for other modules (globe data, etc.)
+  window.VD_BASE = P;
   const GIT = 'https://github.com/pietvanbloom-lab/vector-drift';
   const VERSION = 'v0.2-prod';
   const COMMIT = '8cc0c09';
