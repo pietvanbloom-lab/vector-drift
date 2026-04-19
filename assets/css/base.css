@@ -105,22 +105,22 @@ small,.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:
 .hero-bg-globe{
   position:absolute;
   top:42%;
-  right:40px;
+  right:120px;
   transform:translateY(-50%);
   width:620px;height:620px;
   z-index:1;
   pointer-events:none;
 }
 @media(max-width:1500px){
-  .hero-bg-globe{width:560px;height:560px;right:20px}
+  .hero-bg-globe{width:560px;height:560px;right:90px}
 }
 @media(max-width:1250px){
   .hero-globe .hero-inner{max-width:480px}
-  .hero-bg-globe{width:480px;height:480px;right:0}
+  .hero-bg-globe{width:480px;height:480px;right:60px}
 }
 @media(max-width:1050px){
   .hero-globe .hero-inner{max-width:420px}
-  .hero-bg-globe{width:400px;height:400px;right:-40px;opacity:.8}
+  .hero-bg-globe{width:400px;height:400px;right:20px;opacity:.8}
 }
 @media(max-width:900px){
   .hero-globe{padding:48px 0 40px;min-height:0;display:flex;flex-direction:column}
