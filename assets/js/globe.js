@@ -63,18 +63,18 @@
     // --- defs: glow filters, radial shading, clip ---
     const defs = document.createElementNS(NS,'defs');
     defs.innerHTML = `
-      <radialGradient id="vd-ocean" cx="45%" cy="40%" r="62%">
-        <stop offset="0%"  stop-color="#0F2A33"/>
-        <stop offset="55%" stop-color="#081820"/>
-        <stop offset="100%" stop-color="#030A10"/>
+      <radialGradient id="vd-ocean" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stop-color="rgba(0,255,204,0.035)"/>
+        <stop offset="70%"  stop-color="rgba(0,255,204,0.02)"/>
+        <stop offset="100%" stop-color="rgba(10,10,15,0)"/>
       </radialGradient>
       <radialGradient id="vd-atmo" cx="50%" cy="50%" r="50%">
-        <stop offset="78%" stop-color="rgba(0,255,204,0)"/>
-        <stop offset="92%" stop-color="rgba(0,255,204,.28)"/>
+        <stop offset="72%" stop-color="rgba(0,255,204,0)"/>
+        <stop offset="86%" stop-color="rgba(0,255,204,.22)"/>
         <stop offset="100%" stop-color="rgba(0,255,204,0)"/>
       </radialGradient>
-      <radialGradient id="vd-glare" cx="30%" cy="25%" r="55%">
-        <stop offset="0%"  stop-color="rgba(0,255,204,.15)"/>
+      <radialGradient id="vd-glare" cx="32%" cy="28%" r="55%">
+        <stop offset="0%"  stop-color="rgba(0,255,204,.08)"/>
         <stop offset="60%" stop-color="rgba(0,255,204,0)"/>
       </radialGradient>
       <filter id="vd-glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -89,14 +89,14 @@
       </clipPath>`;
     svg.appendChild(defs);
 
-    // atmosphere halo (outside disc)
+    // atmosphere halo (outside disc) — wider, softer, bleeds into the void
     const atmo = document.createElementNS(NS,'circle');
     atmo.setAttribute('cx',CX); atmo.setAttribute('cy',CY);
-    atmo.setAttribute('r', R*1.10);
+    atmo.setAttribute('r', R*1.14);
     atmo.setAttribute('fill','url(#vd-atmo)');
     svg.appendChild(atmo);
 
-    // ocean disc
+    // ocean disc (barely-there cyan tint — no hard surface color)
     const ocean = document.createElementNS(NS,'circle');
     ocean.setAttribute('cx',CX); ocean.setAttribute('cy',CY); ocean.setAttribute('r',R);
     ocean.setAttribute('fill','url(#vd-ocean)');
@@ -122,11 +122,11 @@
     glare.setAttribute('pointer-events','none');
     svg.appendChild(glare);
 
-    // rim ring (crisp cyan edge)
+    // rim ring (cyan edge, slightly softer so it feels like horizon glow)
     const rim = document.createElementNS(NS,'circle');
     rim.setAttribute('cx',CX); rim.setAttribute('cy',CY); rim.setAttribute('r',R);
     rim.setAttribute('fill','none');
-    rim.setAttribute('stroke','rgba(0,255,204,.55)');
+    rim.setAttribute('stroke','rgba(0,255,204,.45)');
     rim.setAttribute('stroke-width','1');
     svg.appendChild(rim);
 
