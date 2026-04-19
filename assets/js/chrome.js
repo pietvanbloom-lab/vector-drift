@@ -6,7 +6,7 @@
   const P = depth > 0 ? '../'.repeat(depth) : './';
   const GIT = 'https://github.com/pietvanbloom-lab/vector-drift';
   const VERSION = 'v0.2-prod';
-  const COMMIT = 'abc1234';
+  const COMMIT = '8cc0c09';
 
   const logo = `
     <svg viewBox="0 0 40 40" aria-label="Vector//Drift mark">
