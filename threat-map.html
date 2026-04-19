@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Threat Map · Vector//Drift</title>
+<meta name="description" content="Interactive global threat surface with live signal overlays across six threat lenses."/>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M6 28 L20 6 L34 28' stroke='%2300FFCC' stroke-width='3' fill='none'/><circle cx='20' cy='20' r='14' stroke='%2300FFCC' stroke-width='2' fill='none'/></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css"/>
+<style>
+  .map-legend{display:flex;gap:18px;flex-wrap:wrap;margin:24px 0;font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .chip{display:inline-flex;align-items:center;gap:6px}
+  .chip::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal)}
+  .chip.amber::before{background:var(--noise);box-shadow:0 0 8px var(--noise)}
+  .chip.red::before{background:var(--red);box-shadow:0 0 8px var(--red)}
+  .chip.gray::before{background:var(--muted-2);box-shadow:none}
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .filter-row button{
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    padding:8px 12px;border:1px solid var(--line-2);background:transparent;color:var(--muted);
+    border-radius:var(--radius);cursor:pointer;transition:all .2s;
+  }
+  .filter-row button:hover{color:#fff;border-color:var(--line-2)}
+  .filter-row button.on{color:var(--signal);border-color:var(--signal);background:rgba(0,255,204,.06)}
+  .map-events{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .event{background:var(--surface);border:1px solid var(--line);padding:14px}
+  .event .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .event .region{font-family:var(--f-display);letter-spacing:.1em;color:#fff;font-size:15px;text-transform:uppercase}
+  .event .sev{font-family:var(--f-mono);font-size:10px;letter-spacing:.22em}
+  .event p{color:#c0c0d0;font-size:13px;margin:0}
+</style>
+</head>
+<body data-page="threat-map" data-depth="0">
+
+<header id="topbar" class="topbar"></header>
+
+<main>
+  <section class="section" style="padding-top:56px">
+    <div class="container">
+      <div class="page-meta" data-reveal>
+        <span class="accent">◆ LIVE DASHBOARD / THREAT SURFACE</span>
+        <span>Refresh · continuous</span>
+      </div>
+      <h1 style="margin-bottom:16px" data-reveal>Global threat surface.</h1>
+      <p class="lede" style="max-width:80ch" data-reveal>Click a region to filter all modules. Hover a hotspot for a country snapshot. This page renders a schematic projection - not a geopolitical claim.</p>
+
+      <div class="filter-row" data-reveal>
+        <button class="on" data-f="all">All Lenses</button>
+        <button data-f="cyber">Cyber</button>
+        <button data-f="geo">Geopolitical</button>
+        <button data-f="infra">Infrastructure</button>
+        <button data-f="climate">Climate</button>
+        <button data-f="health">Health</button>
+        <button data-f="finance">Finance</button>
+      </div>
+
+      <div class="map-wrap" data-reveal>
+        <svg viewBox="0 0 1600 800" aria-label="Schematic world threat map">
+          <defs>
+            <linearGradient id="land" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#1a1a28"/>
+              <stop offset="100%" stop-color="#101018"/>
+            </linearGradient>
+            <filter id="glow2"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <!-- grid -->
+          <g stroke="rgba(0,255,204,.06)" stroke-width="0.6">
+            <path d="M0 200 L1600 200 M0 400 L1600 400 M0 600 L1600 600"/>
+            <path d="M200 0 L200 800 M400 0 L400 800 M600 0 L600 800 M800 0 L800 800 M1000 0 L1000 800 M1200 0 L1200 800 M1400 0 L1400 800"/>
+          </g>
+          <!-- simplified landmasses as blobs -->
+          <g fill="url(#land)" stroke="rgba(0,255,204,.22)" stroke-width="0.8">
+            <path d="M150 200 Q250 150 400 170 Q500 200 500 280 Q450 360 350 360 Q220 340 160 300 Z"/>
+            <path d="M520 240 Q620 210 720 230 Q760 300 700 360 Q600 370 540 320 Z"/>
+            <path d="M720 260 Q820 210 980 230 Q1100 250 1200 320 Q1250 420 1150 470 Q1000 480 880 450 Q770 400 720 340 Z"/>
+            <path d="M1050 500 Q1140 480 1220 520 Q1230 600 1160 640 Q1070 640 1040 580 Z"/>
+            <path d="M300 400 Q400 410 430 480 Q420 580 340 640 Q270 600 280 510 Z"/>
+            <path d="M1320 540 Q1400 540 1430 590 Q1420 650 1360 660 Q1310 630 1310 580 Z"/>
+          </g>
+          <!-- hotspots -->
+          <g>
+            <g class="pt" data-lens="geo" data-sev="amber">
+              <circle cx="790" cy="310" r="16" fill="#FFB800" opacity=".12"/>
+              <circle cx="790" cy="310" r="4" fill="#FFB800" filter="url(#glow2)"/>
+              <text x="802" y="308" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">FRA</text>
+            </g>
+            <g class="pt" data-lens="infra" data-sev="red">
+              <circle cx="860" cy="350" r="18" fill="#FF3355" opacity=".15"/>
+              <circle cx="860" cy="350" r="4.5" fill="#FF3355" filter="url(#glow2)"/>
+              <text x="872" y="348" fill="#FF3355" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SUEZ</text>
+            </g>
+            <g class="pt" data-lens="cyber" data-sev="cyan">
+              <circle cx="360" cy="300" r="14" fill="#00FFCC" opacity=".12"/>
+              <circle cx="360" cy="300" r="4" fill="#00FFCC" filter="url(#glow2)"/>
+              <text x="372" y="298" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">NYC</text>
+            </g>
+            <g class="pt" data-lens="geo" data-sev="red">
+              <circle cx="960" cy="260" r="18" fill="#FF3355" opacity=".15"/>
+              <circle cx="960" cy="260" r="4.5" fill="#FF3355" filter="url(#glow2)"/>
+              <text x="972" y="258" fill="#FF3355" font-family="JetBrains Mono" font-size="10" letter-spacing="2">MOS</text>
+            </g>
+            <g class="pt" data-lens="cyber" data-sev="amber">
+              <circle cx="1190" cy="360" r="16" fill="#FFB800" opacity=".12"/>
+              <circle cx="1190" cy="360" r="4" fill="#FFB800" filter="url(#glow2)"/>
+              <text x="1202" y="358" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">TYO</text>
+            </g>
+            <g class="pt" data-lens="finance" data-sev="amber">
+              <circle cx="1150" cy="420" r="14" fill="#FFB800" opacity=".12"/>
+              <circle cx="1150" cy="420" r="4" fill="#FFB800" filter="url(#glow2)"/>
+              <text x="1162" y="418" fill="#FFB800" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SGP</text>
+            </g>
+            <g class="pt" data-lens="climate" data-sev="cyan">
+              <circle cx="400" cy="580" r="14" fill="#00FFCC" opacity=".12"/>
+              <circle cx="400" cy="580" r="4" fill="#00FFCC" filter="url(#glow2)"/>
+              <text x="412" y="578" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SAO</text>
+            </g>
+            <g class="pt" data-lens="health" data-sev="cyan">
+              <circle cx="1100" cy="330" r="14" fill="#00FFCC" opacity=".12"/>
+              <circle cx="1100" cy="330" r="4" fill="#00FFCC" filter="url(#glow2)"/>
+              <text x="1112" y="328" fill="#00FFCC" font-family="JetBrains Mono" font-size="10" letter-spacing="2">SHA</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="map-legend">
+        <span class="chip">Cyan - Verified / Monitoring</span>
+        <span class="chip amber">Amber - Elevated</span>
+        <span class="chip red">Red - Critical</span>
+        <span class="chip gray">Static - Baseline</span>
+      </div>
+
+      <div class="map-events">
+        <div class="event" data-lens="infra">
+          <div class="head"><span class="region">Suez · SUEZ</span><span class="sev" style="color:var(--red)">● CRITICAL</span></div>
+          <p>3 VLCC tankers in stationary AIS pattern, 41nm north. Dwell 6h and rising.</p>
+        </div>
+        <div class="event" data-lens="geo">
+          <div class="head"><span class="region">Frankfurt · FRA</span><span class="sev" style="color:var(--noise)">▲ ELEVATED</span></div>
+          <p>Grid frequency deviation 49.87 Hz held for 38s across ENTSO-E DE/AT zone.</p>
+        </div>
+        <div class="event" data-lens="cyber">
+          <div class="head"><span class="region">New York · NYC</span><span class="sev" style="color:var(--signal)">◆ MONITORING</span></div>
+          <p>NIST 2.0 update dispatched to 3,200 EU entities - compliance clock started.</p>
+        </div>
+        <div class="event" data-lens="geo">
+          <div class="head"><span class="region">Moscow · MOS</span><span class="sev" style="color:var(--red)">● CRITICAL</span></div>
+          <p>Sanctions delta: 14 new entities designated, 3 SWIFT disconnects pending.</p>
+        </div>
+        <div class="event" data-lens="cyber">
+          <div class="head"><span class="region">Tokyo · TYO</span><span class="sev" style="color:var(--noise)">▲ ELEVATED</span></div>
+          <p>CVE-2026-3317: edge-router auth bypass, 240k internet-exposed hosts identified.</p>
+        </div>
+        <div class="event" data-lens="finance">
+          <div class="head"><span class="region">Singapore · SGP</span><span class="sev" style="color:var(--noise)">▲ ELEVATED</span></div>
+          <p>EUR swap-spreads widen 4bps - funding-stress indicator rising.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer"></footer>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  // simple filter interaction
+  const buttons = document.querySelectorAll('.filter-row button');
+  const events = document.querySelectorAll('.map-events .event');
+  const pts = document.querySelectorAll('.map-wrap .pt');
+  buttons.forEach(b => b.addEventListener('click', () => {
+    buttons.forEach(x => x.classList.remove('on')); b.classList.add('on');
+    const f = b.dataset.f;
+    events.forEach(e => { e.style.display = (f==='all' || e.dataset.lens===f) ? '' : 'none'; });
+    pts.forEach(p => { p.style.opacity = (f==='all' || p.dataset.lens===f) ? 1 : 0.18; });
+  }));
+</script>
+</body>
+</html>

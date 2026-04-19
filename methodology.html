@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Methodology · Vector//Drift</title>
+<meta name="description" content="How Vector//Drift ingests, classifies, scores, filters and publishes threat signals. FACT / ASSESSMENT / FORECAST discipline."/>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M6 28 L20 6 L34 28' stroke='%2300FFCC' stroke-width='3' fill='none'/><circle cx='20' cy='20' r='14' stroke='%2300FFCC' stroke-width='2' fill='none'/></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css"/>
+</head>
+<body data-page="methodology" data-depth="0">
+
+<header id="topbar" class="topbar"></header>
+
+<main>
+  <section class="section">
+    <div class="container prose">
+      <div class="page-meta">
+        <span class="accent">◆ METHODOLOGY · v0.2</span>
+        <span>Last reviewed · 19 Apr 2026</span>
+      </div>
+      <h1>How we turn noise into signal.</h1>
+      <p class="lede" style="margin-top:16px">An eight-step pipeline, a four-color severity system, and one rule that governs every published line: say what you know, then say what you think, then say what might happen - and never blend them.</p>
+
+      <h2>1 · Ingest</h2>
+      <p>We pull from Tier-1 open sources (ECMWF, ENTSO-E, WHO, MarineTraffic AIS, NIST, CERT-EU, IMF), Tier-2 vetted aggregators, and partner analyst tagging. Every signal carries a source URL and a first-seen timestamp. No anonymous submissions, no paid placements.</p>
+
+      <h2>2 · Deduplicate</h2>
+      <p>Near-duplicates are merged across sources using a combination of semantic similarity and shared entity fingerprints. A dedupe ratio below 0.82 blocks auto-merging.</p>
+
+      <h2>3 · Classify</h2>
+      <p>Each signal is tagged across six lenses: cyber, geopolitical, infrastructure, climate, health, finance. Signals can carry multiple tags; escalation uses the highest-severity lens.</p>
+
+      <h2>4 · Score</h2>
+      <p>Four scalars, each 0–100, combined into a composite:</p>
+      <ul>
+        <li><b style="color:#fff">Severity</b> - potential operational impact</li>
+        <li><b style="color:#fff">Confidence</b> - source triangulation and verifiability</li>
+        <li><b style="color:#fff">Velocity</b> - how fast the situation is evolving</li>
+        <li><b style="color:#fff">Exposure</b> - how concentrated the affected population is</li>
+      </ul>
+
+      <h2>5 · Filter</h2>
+      <p>Signals with confidence below 0.55 and severity below 40 are archived to the low-priority view. They remain queryable via the public API but are hidden from the live feed to prevent alert fatigue.</p>
+
+      <h2>6 · Publish</h2>
+      <p>Every publication uses three labelled blocks:</p>
+      <blockquote>
+        <b style="color:var(--signal)">FACT</b> - a verifiable, sourced, timestamped claim.<br/>
+        <b style="color:var(--noise)">ASSESSMENT</b> - our interpretation, bounded by uncertainty language.<br/>
+        <b style="color:#7a8cff">FORECAST</b> - a falsifiable prediction with a confidence score and time horizon.
+      </blockquote>
+      <p>The boundary between these blocks is the most important editorial rule at Vector//Drift. Crossing it is a publishing incident.</p>
+
+      <h2>7 · Escalate</h2>
+      <p>Composite score ≥ 75 triggers an analyst briefing; ≥ 90 triggers a same-hour alert to subscribers and pushes an amendment to the live dashboard state strip. Escalations are logged with a visible rationale.</p>
+
+      <h2>8 · Close the loop</h2>
+      <p>Every forecast gets a post-mortem within 30 days of its horizon. Hit rate, calibration error, and brier score are published per analyst, per lens, per quarter. Corrections follow a 60-minute SLA and are never silently overwritten - we publish the delta.</p>
+
+      <h2>Severity color system</h2>
+      <p>The palette is not decorative.</p>
+      <ul>
+        <li><b style="color:var(--signal)">Cyan</b> - verified signal, active monitoring, nominal operating state.</li>
+        <li><b style="color:var(--noise)">Amber</b> - elevated risk, ambiguity, or deteriorating condition.</li>
+        <li><b style="color:var(--red)">Red</b> - critical: confirmed, fast-moving, high exposure.</li>
+        <li><b style="color:var(--muted)">Static</b> - baseline / archival.</li>
+      </ul>
+
+      <h2>What we will not do</h2>
+      <ul>
+        <li>We do not publish unverified claims dressed as facts.</li>
+        <li>We do not hide corrections. Every correction has a public ledger entry.</li>
+        <li>We do not sell signal amplification. Advertisers cannot influence severity.</li>
+        <li>We do not close-source operational code. Running version is always disclosed under AGPL-3.0.</li>
+      </ul>
+
+      <h2>License and disclosure</h2>
+      <p>All code is distributed under <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">AGPL-3.0</a>. The running production version and its commit hash are displayed in the footer of every page, and at <a href="./source.html">/source</a>. If you operate a modified version of Vector//Drift that users can interact with over a network, you must make your corresponding source available to those users under the same license.</p>
+
+      <p class="mono" style="margin-top:40px;color:var(--muted-2)">◆ Vector//Drift methodology is itself versioned. See <a href="https://github.com/pietvanbloom-lab/vector-drift/blob/main/METHODOLOGY.md">METHODOLOGY.md</a> for the canonical, diff-viewable spec.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="footer"></footer>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

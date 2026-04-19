@@ -1,0 +1,33 @@
+# Vector//Drift - compose with Certbot companion for Let's Encrypt HTTPS.
+# Expects DNS for vector-drift.org and www.vector-drift.org to resolve to this host.
+services:
+  vector-drift:
+    build: .
+    image: vector-drift:latest
+    container_name: vector-drift
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot-www:/var/www/certbot
+    networks: [web]
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: vd-certbot
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot-www:/var/www/certbot
+    entrypoint: >
+      /bin/sh -c "trap exit TERM;
+      while :;
+        do certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h & wait $${!};
+      done"
+    networks: [web]
+
+networks:
+  web:
+    driver: bridge

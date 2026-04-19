@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Vector//Drift · Open-source threat intelligence</title>
+<meta name="description" content="Vector//Drift monitors, analyses and reports on global threats across cyber, geopolitical, infrastructure, climate, health and financial domains. Open-source, AGPL-3.0."/>
+<meta name="theme-color" content="#0A0A0F"/>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M6 28 L20 6 L34 28' stroke='%2300FFCC' stroke-width='3' fill='none'/><circle cx='20' cy='20' r='14' stroke='%2300FFCC' stroke-width='2' fill='none'/></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css"/>
+</head>
+<body data-page="overview" data-depth="0">
+
+<header id="topbar" class="topbar"></header>
+
+<main>
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div data-reveal>
+        <div class="eyebrow">
+          <span class="pill">▲ Live Intelligence · AGPL-3.0</span>
+          <span class="mono">BUILD VD-0.2 · SESSION <span data-sid></span></span>
+        </div>
+        <h1>See the world's<br/>emerging <em>risks</em><br/>before they<br/>become reality.</h1>
+        <p class="lede">Vector//Drift is an open-source threat-intelligence console. We monitor cyber, geopolitical, infrastructure, climate, health and financial signals, filter the noise, and publish structured analysis operators can act on.</p>
+        <div class="cta-row">
+          <a class="btn btn-signal" href="./threat-map.html">Open Live Dashboard →</a>
+          <a class="btn" href="./methodology.html">Read Methodology</a>
+          <a class="btn" href="./editorial/de.html">Editorial DE ↗</a>
+        </div>
+      </div>
+
+      <div class="globe-panel" data-reveal>
+        <span class="globe-label">GLOBAL SURFACE · 8 NODES ACTIVE</span>
+        <svg id="globe" aria-hidden="true"></svg>
+        <div class="globe-ticker">
+          <span>SEV CYAN <b>12</b></span>
+          <span>AMBER <b>4</b></span>
+          <span>RED <b>1</b></span>
+          <span>CONF <b>0.78</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LIVE CONSOLE ============== -->
+  <section class="section">
+    <div class="container">
+      <div class="page-meta" data-reveal>
+        <span class="accent">◆ 01 / LIVE CONSOLE</span>
+        <span>Auto-updating · 2.8 s cadence</span>
+      </div>
+
+      <div class="bento">
+        <!-- feed -->
+        <div class="card span-7" data-reveal>
+          <div class="head">
+            <h3>Signal Feed</h3>
+            <span class="tag">Real-time</span>
+          </div>
+          <div class="feed" id="feed"></div>
+        </div>
+
+        <!-- neural load -->
+        <div class="card span-5" data-reveal>
+          <div class="head">
+            <h3>Neural Load</h3>
+            <span class="tag">30 min</span>
+          </div>
+          <svg data-spark aria-hidden="true"></svg>
+          <p class="mono" style="margin:8px 0 0">MODEL IN-FLIGHT · 64 SOURCES · LATENCY 312 ms</p>
+        </div>
+
+        <!-- sector strength -->
+        <div class="card span-6" data-reveal>
+          <div class="head">
+            <h3>Sector Signal Strength</h3>
+            <span class="tag">24 h</span>
+          </div>
+          <div class="bar-row"><span>Cyber</span><span class="bar"><span style="width:82%"></span></span><span>82</span></div>
+          <div class="bar-row"><span>Geopolitical</span><span class="bar amber"><span style="width:71%"></span></span><span>71</span></div>
+          <div class="bar-row"><span>Infrastructure</span><span class="bar red"><span style="width:64%"></span></span><span>64</span></div>
+          <div class="bar-row"><span>Climate</span><span class="bar"><span style="width:48%"></span></span><span>48</span></div>
+          <div class="bar-row"><span>Health</span><span class="bar"><span style="width:36%"></span></span><span>36</span></div>
+          <div class="bar-row"><span>Finance</span><span class="bar amber"><span style="width:57%"></span></span><span>57</span></div>
+        </div>
+
+        <!-- system strip -->
+        <div class="card span-6" data-reveal>
+          <div class="head">
+            <h3>System Status</h3>
+            <span class="tag">Nominal</span>
+          </div>
+          <div class="sys">
+            <span>INGEST <b>OK</b></span>
+            <span>CLASSIFY <b>OK</b></span>
+            <span>SCORING <b>OK</b></span>
+            <span>PUBLISH <b>OK</b></span>
+          </div>
+          <div class="sys" style="margin-top:14px">
+            <span>SIGNALS/H <b>142</b></span>
+            <span>ARCHIVED <b>86</b></span>
+            <span>ESCALATED <b>7</b></span>
+            <span>CORRECTIONS <b>0</b></span>
+          </div>
+          <p class="mono" style="margin-top:16px;color:var(--muted-2)">
+            Last model refresh · <span data-utc></span> · Build VD-0.2-prod · commit abc1234
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== THREAT LENSES ============== -->
+  <section class="section">
+    <div class="container">
+      <div class="page-meta" data-reveal>
+        <span class="accent">◆ 02 / THREAT LENSES</span>
+        <span>Six vectors · one surface</span>
+      </div>
+      <h2 style="margin-bottom:32px" data-reveal>We watch six surfaces because risks rarely travel alone.</h2>
+      <div class="lenses">
+        <div class="lens" data-reveal>
+          <div class="state mon">◆ Monitoring</div>
+          <h3>Cyber</h3>
+          <p>CVE velocity, ransomware cadence, nation-state TTP shifts, exposed-asset scans across 240k surfaces.</p>
+        </div>
+        <div class="lens" data-reveal>
+          <div class="state elev">▲ Elevated</div>
+          <h3>Geopolitical</h3>
+          <p>Chokepoints, sanctions, alliance drift, migration corridors, conflict escalation ladders across 187 jurisdictions.</p>
+        </div>
+        <div class="lens" data-reveal>
+          <div class="state crit">● Critical</div>
+          <h3>Infrastructure</h3>
+          <p>Grid stability (ENTSO-E, ISO-NE), port AIS anomalies, rail throughput, cloud-region blast radius.</p>
+        </div>
+        <div class="lens" data-reveal>
+          <div class="state mon">◆ Monitoring</div>
+          <h3>Climate</h3>
+          <p>ECMWF reforecasts, river levels, insurance loss drivers, agricultural stress, Atlantic basin outlook.</p>
+        </div>
+        <div class="lens" data-reveal>
+          <div class="state mon">◆ Monitoring</div>
+          <h3>Health</h3>
+          <p>WHO event signals, wastewater panels, pathogen of concern clusters, health-system capacity tension.</p>
+        </div>
+        <div class="lens" data-reveal>
+          <div class="state elev">▲ Elevated</div>
+          <h3>Finance</h3>
+          <p>Funding-stress, credit-spread regime shifts, FX dislocations, contagion paths through SIFI networks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ANALYST BRIEFING ============== -->
+  <section class="section">
+    <div class="container">
+      <div class="page-meta" data-reveal>
+        <span class="accent">◆ 03 / ANALYST BRIEFING</span>
+        <span>Daily · published 06:00 UTC</span>
+      </div>
+      <div class="brief">
+        <div class="brief-card" data-reveal>
+          <span class="mono-label">▲ Today's Brief · Red Sea Reroute Risk</span>
+          <h2 style="margin-top:10px">Houthi strikes compound a 14% capacity squeeze on EU-AE lanes.</h2>
+          <div class="triple">
+            <div class="f">
+              <div class="label">FACT</div>
+              <div>Three VLCC tankers have held a stationary pattern 41nm north of Bab-el-Mandeb for 6 hours (AIS-confirmed, Source: MarineTraffic open feed, 19 Apr 2026).</div>
+            </div>
+            <div class="a">
+              <div class="label">ASSESSMENT</div>
+              <div>Rerouting via Cape of Good Hope adds 10–14 days to EU-AE voyages. At current rates, 9–12% of non-critical dry-bulk will defer. Freight rates on the AE-NWE lane are up 27% week-over-week.</div>
+            </div>
+            <div class="fc">
+              <div class="label">FORECAST · CONF 0.62</div>
+              <div>If the pattern persists beyond 72 hours we expect a second wave of carrier surcharges and Q3 EU import cover tightening by mid-May. Monitor ENTSO-E gas inventories as the secondary signal.</div>
+            </div>
+          </div>
+          <div class="cta-row" style="margin-top:24px">
+            <a class="btn" href="./methodology.html">How we score this →</a>
+            <a class="btn" href="./editorial/de.html">Deutsch lesen ↗</a>
+          </div>
+        </div>
+
+        <div class="brief-card watchlist" data-reveal>
+          <span class="mono-label">◆ Watchlist · 7 Items</span>
+          <h2 style="margin-top:10px">Rising exposures</h2>
+          <ul>
+            <li><span>DE · Grid frequency</span><span class="chg up">+0.13 Hz</span></li>
+            <li><span>CN · Copper imports</span><span class="chg up">+6.2%</span></li>
+            <li><span>Suez AIS anomalies</span><span class="chg up">+14</span></li>
+            <li><span>EUR-USD vol (1w)</span><span class="chg up">+0.8σ</span></li>
+            <li><span>NL · Port of Rotterdam dwell</span><span class="chg up">+11h</span></li>
+            <li><span>TW Strait PLAN sorties</span><span class="chg down">−3</span></li>
+            <li><span>BR · Soy export cadence</span><span class="chg down">−4.1%</span></li>
+          </ul>
+          <p class="mono" style="margin-top:16px;color:var(--muted-2)">NEXT REFRESH · 06:00 UTC TOMORROW</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== OPEN SOURCE BAND ============== -->
+  <section class="oss">
+    <div class="container oss-grid">
+      <div data-reveal>
+        <span class="mono-label" style="color:var(--signal)">▲ Open by default</span>
+        <h2 style="margin-top:10px">Every signal we publish, every model we run, and every correction we make is public.</h2>
+        <p style="color:var(--muted);max-width:68ch;margin-top:12px">We license the entire codebase under <b style="color:#fff">AGPL-3.0</b>. If you run a modified version as a network service, you must make your source available to your users, under the same license. This is how we keep the intelligence commons from being enclosed.</p>
+      </div>
+      <div class="ctas" data-reveal>
+        <a class="btn btn-signal" href="https://github.com/pietvanbloom-lab/vector-drift" target="_blank" rel="noopener">GitHub · Source</a>
+        <a class="btn" href="./source.html">AGPL Source Offer</a>
+        <a class="btn" href="./methodology.html">Methodology</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer"></footer>
+
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
