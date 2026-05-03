@@ -8,7 +8,7 @@ in production.
 
 - **License:** [AGPL-3.0](LICENSE)
 - **Running:** `v0.2-prod` · commit `ed99c97`
-- **Live site:** https://vector-drift.org
+- **Live site:** https://vector-drift.org _(domain registration in progress; mirror available on [Perplexity hosting](https://www.perplexity.ai/computer/a/vector-drift-guWF.UvsTCaGmOsUAlyIGA))_
 - **Source offer:** https://vector-drift.org/source.html
 
 ## Project layout
