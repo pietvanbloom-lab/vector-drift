@@ -1,5 +1,5 @@
 # Vector//Drift - compose with Certbot companion for Let's Encrypt HTTPS.
-# Expects DNS for vector-drift.org and www.vector-drift.org to resolve to this host.
+# Expects DNS for vector-drift.com and www.vector-drift.com to resolve to this host.
 services:
   vector-drift:
     build: .

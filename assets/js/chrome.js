@@ -79,8 +79,8 @@
           <div>
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:compliance@vector-drift.org">compliance@vector-drift.org</a></li>
-              <li><a href="mailto:editorial@vector-drift.org">editorial@vector-drift.org</a></li>
+              <li><a href="mailto:compliance@vector-drift.com">compliance@vector-drift.com</a></li>
+              <li><a href="mailto:editorial@vector-drift.com">editorial@vector-drift.com</a></li>
               <li>Impressum · DE</li>
               <li>Session <span data-sid class="mono" style="color:#00FFCC"></span></li>
             </ul>

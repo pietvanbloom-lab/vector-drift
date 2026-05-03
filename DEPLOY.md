@@ -5,7 +5,7 @@ Target stack: **Ubuntu 22.04 LTS VPS**, **Docker `nginx:alpine` container**, **L
 ## 0 · Prerequisites
 
 - A VPS with a public IPv4 (Hetzner CX11, Digital Ocean Droplet, Oracle Always Free, etc.)
-- A domain pointed at the VPS: `A vector-drift.org → <VPS_IP>` and `A www.vector-drift.org → <VPS_IP>`
+- A domain pointed at the VPS: `A vector-drift.com → <VPS_IP>` and `A www.vector-drift.com → <VPS_IP>`
 - SSH access, ideally via key only (password auth disabled)
 
 ## 1 · Harden the server
@@ -75,14 +75,14 @@ docker run -d --name vd -p 80:80 \
 ```bash
 apt -y install certbot
 certbot certonly --webroot -w /opt/vector-drift/certbot-www \
-  -d vector-drift.org -d www.vector-drift.org \
-  --agree-tos --non-interactive -m compliance@vector-drift.org
+  -d vector-drift.com -d www.vector-drift.com \
+  --agree-tos --non-interactive -m compliance@vector-drift.com
 
 # Verify auto-renewal works
 certbot renew --dry-run
 ```
 
-Certificates land at `/etc/letsencrypt/live/vector-drift.org/`. Mount that into the container (below).
+Certificates land at `/etc/letsencrypt/live/vector-drift.com/`. Mount that into the container (below).
 
 ## 6 · Switch to HTTPS production
 
@@ -115,7 +115,7 @@ docker logs -f vector-drift
 docker exec -it vector-drift sh
 
 # Health
-curl -I https://vector-drift.org
+curl -I https://vector-drift.com
 
 # Re-deploy a new version
 cd /opt/vector-drift
@@ -140,5 +140,5 @@ rsync -a /opt/vector-drift/ /var/www/vector-drift/
 cp /opt/vector-drift/nginx.conf /etc/nginx/sites-available/vector-drift
 ln -s /etc/nginx/sites-available/vector-drift /etc/nginx/sites-enabled/
 nginx -t && systemctl reload nginx
-certbot --nginx -d vector-drift.org -d www.vector-drift.org
+certbot --nginx -d vector-drift.com -d www.vector-drift.com
 ```

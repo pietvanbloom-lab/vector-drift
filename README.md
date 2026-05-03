@@ -8,8 +8,8 @@ in production.
 
 - **License:** [AGPL-3.0](LICENSE)
 - **Running:** `v0.2-prod` · commit `ed99c97`
-- **Live site:** https://vector-drift.org _(domain registration in progress; mirror available on [Perplexity hosting](https://www.perplexity.ai/computer/a/vector-drift-guWF.UvsTCaGmOsUAlyIGA))_
-- **Source offer:** https://vector-drift.org/source.html
+- **Live site:** https://vector-drift.com _(Cloudflare Pages deployment in progress; mirror on [Perplexity hosting](https://www.perplexity.ai/computer/a/vector-drift-guWF.UvsTCaGmOsUAlyIGA))_
+- **Source offer:** https://vector-drift.com/source.html
 
 ## Project layout
 
@@ -60,9 +60,9 @@ footer of every page, and a full source offer at `/source.html`.
 
 ## Contact
 
-- Editorial: editorial@vector-drift.org
-- Compliance / corrections: compliance@vector-drift.org
-- Security disclosures: security@vector-drift.org
+- Editorial: editorial@vector-drift.com
+- Compliance / corrections: compliance@vector-drift.com
+- Security disclosures: security@vector-drift.com
 
 ## Changelog
 
